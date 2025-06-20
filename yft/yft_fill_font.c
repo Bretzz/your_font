@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   yft_fill_font.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: totommi <totommi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 04:55:27 by totommi           #+#    #+#             */
-/*   Updated: 2025/06/20 06:01:45 by totommi          ###   ########.fr       */
+/*   Updated: 2025/06/20 14:27:28 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "yft_int.c"
+#include "yft_int.h"
 
 int		yft_fill_font(char *monoline, t_font *font);
 
@@ -46,12 +46,14 @@ static void	get_color_pair(char *pair_string, t_font *font, int index)
 		return ;
 	}
 	font->table[index].color = ft_atohexi(&pair_string[3]);
+	ft_printf("color %z is %x\n", &pair_string[3], 8, font->table[index].color);
 }
 
-static int get_color_table(char *monoline, t_font *font, int *i)
+static int get_color_table(char *monoline, int colors, t_font *font, size_t *i)
 {
 	int		count;
 
+	ft_printf("getting colors=%d from table of %s\n", colors, monoline);
 	count = 0;
 	(*i) = 0;
 	while (monoline[(*i)] != '\0' && count < 3)
@@ -60,30 +62,35 @@ static int get_color_table(char *monoline, t_font *font, int *i)
 			count++;
 		(*i)++;
 	}
+	// ft_printf("skipped 'ascii'\n");
 	if (monoline[--(*i)] != '"')
 		return (1);
+	// ft_printf("safe check ok\n");
 	count = 0;
 	while (monoline[(*i)] != '\0'
 		&& (monoline[(*i)] != '}' || monoline[(*i) + 1] != '{'))
 	{
-		get_color_pair(&monoline[(*i)++], font, count);
+		get_color_pair(&monoline[(*i)++], font, count++);
+		// ft_printf("got color pair\n");
 		while (monoline[(*i)] && monoline[(*i)] != '"')
-			i++;
-		if (++i && (monoline[(*i)] == '\0' || monoline[(*i)] == '}'))
+			(*i)++;
+		if (++(*i) && (monoline[(*i)] == '\0' || count > colors))
 			return (1);
-		i++;
+		if (monoline[(*i)] == '}')
+			break ;
+		(*i)++;
 	}
 	return (0);
 }
 
-// {font="MyCoolFont",width=9,heigth=5,colors=2,".cVoid","#cFill",}
-static int	get_font_format(char *monoline, t_font *font, int *i)
+// {font="MyCoolFont",width=9,heigth=5,[space=3],colors=2,".cVoid","#cFill"}
+static int	get_font_format(char *monoline, t_font *font, size_t *i)
 {
 	const size_t	mono_len = ft_strlen(monoline);
 	size_t			name_len;
 	char			*target;
 	
-	ft_strlcpy(font->name, &monoline[7], get_quotes_len(&monoline[6]))
+	ft_strlcpy(font->name, &monoline[7], get_quotes_len(&monoline[6]) + 1);
 	target = ft_strnstr(monoline, "heigth=", mono_len);
 	if (target == NULL)
 		return (1);
@@ -93,28 +100,30 @@ static int	get_font_format(char *monoline, t_font *font, int *i)
 		return (1);
 	font->width = ft_atoi(&target[6]);
 	target = ft_strnstr(monoline, "space=", mono_len);
+	if (target != NULL)
+		font->space = ft_atoi(&target[6]);
+	target = ft_strnstr(monoline, "colors=", mono_len);
 	if (target == NULL)
 		return (1);
-	font->space = ft_atoi(&target[6]);
-	if (get_color_table(monoline, font, &i) != 0)
+	font->colors = ft_atoi(&target[7]);
+	if (get_color_table(monoline, font->colors, font, i) != 0)
 		return (1);
 	return (0);
 }
 
 int		yft_fill_font(char *monoline, t_font *font)
 {
-	unsigned int	ascii;
 	size_t			i;
 
 	if (!monoline || !font)
 		return (1);
 	if (get_font_format(monoline, font, &i) != 0)
 		return (2);
-	ascii = 0;
 	i++;	// :(
+	// ft_printf("map realm is here %s\n", &monoline[i]);
 	while (monoline[i] != '\0')
 	{
-		yft_fill_map(&monoline[i], font, ascii++);
+		yft_fill_map(&monoline[i], font);
 		while (monoline[i] != '}' || monoline[i + 1] != '}')			// bad control, super weak, adjust with parsing (count parenthesis?)
 		{
 			if (monoline[i] == '\0')

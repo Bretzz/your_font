@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   yft_int.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: totommi <totommi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 01:48:06 by totommi           #+#    #+#             */
-/*   Updated: 2025/06/20 14:27:50 by topiana-         ###   ########.fr       */
+/*   Updated: 2025/06/21 02:15:34 by totommi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ to do with that image (similar to xpm functions) */
 # define VOID_STRING "Void"
 # define FILL_STRING "Fill"
 
-# define FONT_STRING "font"	/* maybe useless? (and so on...) */
-# define WIDTH_STRING "widt"
+# define FONT_STRING "font="	/* maybe useless? (and so on...) */
+# define WIDTH_STRING "width="
 
 // mlx img related data
 typedef struct s_img
@@ -64,12 +64,11 @@ typedef struct s_font
 	t_draw_map		ascii_table[128];
 }				t_font;
 
-/* "font:string" */
-void	*yft_string_to_image(void *mlx_ptr, const char *string, int scale);
+void	*yft_string_to_image(void *mlx_ptr, const char *font_name, const char *string, int scale);
 
-t_img	yft_img_init(void *mlx_ptr, t_font *font, int length, int heigth);
+t_img	yft_img_init(void *mlx_ptr, int length, int heigth);
 
-void	yft_draw_ascii(t_img *img, t_draw_map *map, int x);
+void	yft_draw_ascii(t_img *img, t_draw_map *map, int x, int scale);
 
 /* GET THE FONT */
 

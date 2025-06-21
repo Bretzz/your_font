@@ -13,7 +13,7 @@ LIGHT_GREEN		= \033[92m
 LIGHT_CYAN		= \033[96m
 RESET			= \033[0m
 
-NAME			:= hpc.a
+NAME			:= yft.a
 UNAME			:= $(shell uname)
 CC				:= cc
 CFLAGS			:= -Wall -Wextra -Werror
@@ -23,28 +23,24 @@ LIBFT			= $(shell find .. -type d -name "libft")
 MLX_DIR			= $(shell find .. -type d -name "minilibx*")
 
 #Linkers
-LINKS			= -L/usr/lib -L$(MLX_DIR) -lXext -lX11 -lm -lz -lpthread
+LINKS			=
 
 #Includes
 INKS			= -I$(CURDIR) -I$(LIBFT) -I$(MLX_DIR)
 
-ifeq ($(UNAME),Darwin)
-	MLX			= $(MLX_DIR)/libmlx.a
-	DEFS		= -D __APPLE__
-	INKS		+= -I/usr/X11/include
-	LINKS		+= -I/opt/homebrew/include -I/usr/X11/include -L/usr/X11/lib -framework OpenGL -framework AppKit
-else ifeq ($(UNAME),Linux)
-	MLX			= $(MLX_DIR)/libmlx_$(UNAME).a
-	DEFS		=
-	INKS		+= -I/usr/include
-	LINKS		+= -lmlx_Linux
-else
-	UNAME = Error
-endif
 
 #source files (expected in the root folder)
 SRCS_DIR		=
-SRC_FILES		= main.c
+SRC_FILES		= yft_is_better.c \
+				yft_string_to_image.c \
+				yft_draw_ascii.c \
+				yft_fill_font.c \
+				yft_fill_map.c \
+				yft_img_init.c \
+				yft_monoline_file.c \
+				yft_parse_file.c \
+				yft_read_file.c \
+				yft_strip_comments.c
 
 SRCS			= $(addprefix $(SRCS_DIR), $(SRC_FILES))
 
@@ -63,13 +59,6 @@ $(OBJS_DIR):
 #-D DEBUG=1
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c | $(OBJS_DIR) 
 	$(CC) $(CFLAGS) $(INKS) $(DEFS) -c $< -o $@
-
-$(LIBFT)libft.a:
-	@$(MAKE) all -C $(LIBFT) --quiet
-
-$(MLX):
-	@rm -f $(MLX_DIR)/libmlx.a
-	@$(MAKE) -C $(MLX_DIR) --quiet
 
 $(NAME): $(OBJS)
 	@ar rcs $(NAME) $(OBJS)

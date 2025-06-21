@@ -3,36 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   yft_draw_ascii.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: totommi <totommi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 13:26:01 by topiana-          #+#    #+#             */
-/*   Updated: 2025/06/20 13:58:39 by topiana-         ###   ########.fr       */
+/*   Updated: 2025/06/21 02:00:31 by totommi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "yft_int.h"
 
-void	yft_draw_ascii(t_img *img, t_draw_map *map, int x);
+void	yft_draw_ascii(t_img *img, t_draw_map *map, int x, int scale);
 
-void	yft_draw_ascii(t_img *img, t_draw_map *map, int x)
+static void	draw_scaled_pixel(t_img *img, int x, int y, unsigned int color, int scale)
+{
+	int	t;
+	int s;
+
+	t = 0;
+	while (t < scale)
+	{
+		s = 0;
+		while (s < scale)
+		{
+			if (x + t < img->width && y + s < img->heigth)
+			{
+				*(unsigned int *)(img->addr + (((y + s) * img->line_length)
+					+ ((x + t) * img->bpp))) = color;
+			}
+			s++;
+		}
+		t++;
+	}
+}
+
+void	yft_draw_ascii(t_img *img, t_draw_map *map, int x, int scale)
 {
 	int	my_x;
 	int	my_y;
 	int	i;
 
-	ft_printf("drawing %c from %d\n", map->what, x);
+	// ft_printf("drawing %c from %d\n", map->what, x);
 	if (map->what == '\0')
 		return ;
 	i = 0;
 	while (map->map[i][0] != -1)
 	{
-		my_x = x + map->map[i][0];
-		my_y = map->map[i][1];
-		if (my_x < img->width)
+		my_x = (x + map->map[i][0]) * scale;
+		my_y = map->map[i][1] * scale;
+		if (my_x < img->width * scale)
 		{
-			ft_printf("drawing [%d,%d]\n", my_x, my_y);
-			*(unsigned int *)(img->addr + ((my_y * img->line_length)
-				+ (my_x * img->bpp))) = map->map[i][2];
+			// ft_printf("drawing [%d,%d]\n", my_x, my_y);
+			draw_scaled_pixel(img, my_x, my_y, map->map[i][2], scale);
+			// *(unsigned int *)(img->addr + ((my_y * img->line_length)
+			// 	+ (my_x * img->bpp))) = map->map[i][2];
 			// *(unsigned int *)(img->addr + ((2 * img->line_length)
 			// 	+ (18 * img->bpp))) = 0xff0000;
 		}

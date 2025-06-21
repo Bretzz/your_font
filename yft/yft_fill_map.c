@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   yft_fill_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: totommi <totommi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 05:02:12 by totommi           #+#    #+#             */
-/*   Updated: 2025/06/20 14:26:28 by topiana-         ###   ########.fr       */
+/*   Updated: 2025/06/21 02:01:17 by totommi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	get_row_pixels(char *row, const int y, t_font *font, int what)
 		if (row[i] == '\0')
 			return (1);
 		color = get_pointer_color(row[i], font);
-		ft_printf("%c has color %x\n", row[i], color);
+		// ft_printf("%c has color %x\n", row[i], color);
 		if (color != 0x000000)
 		{
 			font->ascii_table[what].map[pixel_count][0] = i - 1;
@@ -76,7 +76,7 @@ int		yft_fill_map(char *miniline, t_font *font)
 	while (miniline[i] && miniline[i] != '{')
 		i++;
 	i = i + 1;
-	ft_printf("colors starts here %s\n", &miniline[i]);
+	// ft_printf("colors starts here %s\n", &miniline[i]);
 	// exit(0);
 	y = 0;
 	while(miniline[i] != '\0' && y < font->heigth

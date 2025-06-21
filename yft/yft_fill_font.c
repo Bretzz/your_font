@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   yft_fill_font.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: totommi <totommi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 04:55:27 by totommi           #+#    #+#             */
-/*   Updated: 2025/06/20 14:27:28 by topiana-         ###   ########.fr       */
+/*   Updated: 2025/06/21 02:15:08 by totommi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ static void	get_color_pair(char *pair_string, t_font *font, int index)
 		return ;
 	}
 	font->table[index].color = ft_atohexi(&pair_string[3]);
-	ft_printf("color %z is %x\n", &pair_string[3], 8, font->table[index].color);
+	// ft_printf("color %z is %x\n", &pair_string[3], 8, font->table[index].color);
 }
 
 static int get_color_table(char *monoline, int colors, t_font *font, size_t *i)
 {
 	int		count;
 
-	ft_printf("getting colors=%d from table of %s\n", colors, monoline);
+	// ft_printf("getting colors=%d from table of %s\n", colors, monoline);
 	count = 0;
 	(*i) = 0;
 	while (monoline[(*i)] != '\0' && count < 3)
@@ -87,7 +87,6 @@ static int get_color_table(char *monoline, int colors, t_font *font, size_t *i)
 static int	get_font_format(char *monoline, t_font *font, size_t *i)
 {
 	const size_t	mono_len = ft_strlen(monoline);
-	size_t			name_len;
 	char			*target;
 	
 	ft_strlcpy(font->name, &monoline[7], get_quotes_len(&monoline[6]) + 1);

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   yft_img_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: totommi <totommi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 13:19:19 by topiana-          #+#    #+#             */
-/*   Updated: 2025/06/20 13:59:14 by topiana-         ###   ########.fr       */
+/*   Updated: 2025/06/21 02:15:27 by totommi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "yft_int.h"
 
-t_img	yft_img_init(void *mlx_ptr, t_font *font, int length, int heigth);
+t_img	yft_img_init(void *mlx_ptr, int length, int heigth);
 
-t_img	yft_img_init(void *mlx_ptr, t_font *font, int length, int heigth)
+t_img	yft_img_init(void *mlx_ptr, int length, int heigth)
 {
 	t_img	new_img;
 

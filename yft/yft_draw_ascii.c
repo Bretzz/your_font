@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   yft_draw_ascii.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: totommi <totommi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 13:26:01 by topiana-          #+#    #+#             */
-/*   Updated: 2025/06/21 02:00:31 by totommi          ###   ########.fr       */
+/*   Updated: 2025/06/21 17:43:13 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "yft_int.h"
 
-void	yft_draw_ascii(t_img *img, t_draw_map *map, int x, int scale);
+void	yft_draw_ascii(t_my_img *img, t_draw_map *map, int *coord, int scale);
 
-static void	draw_scaled_pixel(t_img *img, int x, int y, unsigned int color, int scale)
+static void	draw_scaled_pixel(t_my_img *img,
+	int *pixel, unsigned int color, int scale)
 {
 	int	t;
-	int s;
+	int	s;
 
 	t = 0;
 	while (t < scale)
@@ -25,10 +26,11 @@ static void	draw_scaled_pixel(t_img *img, int x, int y, unsigned int color, int 
 		s = 0;
 		while (s < scale)
 		{
-			if (x + t < img->width && y + s < img->heigth)
+			if (pixel[0] + t < img->width && pixel[1] + s < img->heigth)
 			{
-				*(unsigned int *)(img->addr + (((y + s) * img->line_length)
-					+ ((x + t) * img->bpp))) = color;
+				*(unsigned int *)(img->addr
+						+ (((pixel[1] + s) * img->line_length)
+							+ ((pixel[0] + t) * img->bpp))) = color;
 			}
 			s++;
 		}
@@ -36,120 +38,21 @@ static void	draw_scaled_pixel(t_img *img, int x, int y, unsigned int color, int 
 	}
 }
 
-void	yft_draw_ascii(t_img *img, t_draw_map *map, int x, int scale)
+void	yft_draw_ascii(t_my_img *img, t_draw_map *map, int *coord, int scale)
 {
-	int	my_x;
-	int	my_y;
+	int	pixel[2];
 	int	i;
 
-	// ft_printf("drawing %c from %d\n", map->what, x);
 	if (map->what == '\0')
 		return ;
 	i = 0;
 	while (map->map[i][0] != -1)
 	{
-		my_x = (x + map->map[i][0]) * scale;
-		my_y = map->map[i][1] * scale;
-		if (my_x < img->width * scale)
-		{
-			// ft_printf("drawing [%d,%d]\n", my_x, my_y);
-			draw_scaled_pixel(img, my_x, my_y, map->map[i][2], scale);
-			// *(unsigned int *)(img->addr + ((my_y * img->line_length)
-			// 	+ (my_x * img->bpp))) = map->map[i][2];
-			// *(unsigned int *)(img->addr + ((2 * img->line_length)
-			// 	+ (18 * img->bpp))) = 0xff0000;
-		}
+		pixel[0] = (coord[0] + map->map[i][0]) * scale;
+		pixel[1] = (coord[1] + map->map[i][1]) * scale;
+		if (pixel[0] < img->width && pixel[1]
+			< img->heigth && map->map[i][2] != VOID)
+			draw_scaled_pixel(img, pixel, map->map[i][2], scale);
 		i++;
 	}
 }
-
-
-
-// typedef struct s_draw_map2
-// {
-// 	char	letter;
-// 	int		pixel[24][2];
-// }				t_draw_map2;
-
-// void	my_string_put(void *my_struct, int x, int y, const char *string, unsigned int color);
-
-// /* one letter is 6x6 */
-// static t_draw_map2 get_maiusc_letter(const char letter)
-// {
-// 	const t_draw_map2 empty = {letter, {{-1,-1}}};
-// 	static const t_draw_map2 alphabet[26] = {
-// 		{'A', {{1,0},{2,0},{0,1},{3,1},{0,2},{1,3},{2,3},{3,2},{0,3},{3,3},{0,4},{3,4},{0,5},{3,5},{-1,-1}}},
-// 		{'B', {{0,0},{1,0},{2,0},{0,1},{3,1},{0,2},{2,2},{1,2},{0,3},{3,3},{0,4},{3,4},{0,5},{1,5},{2,5},{-1,-1}}},
-// 		{'C', {{1,0},{2,0},{3,0},{0,1},{0,2},{0,3},{0,4},{1,5},{2,5},{3,5},{-1,-1}}},
-// 		{'D', {{0,0},{1,0},{2,0},{0,1},{3,1},{0,2},{3,2},{0,3},{3,3},{0,4},{3,4},{0,5},{1,5},{2,5},{-1,-1}}},
-// 		{'E', {{0,0},{1,0},{2,0},{3,0},{0,1},{0,2},{1,2},{2,2},{3,2},{0,3},{0,4},{0,5},{1,5},{2,5},{3,5},{-1,-1}}},
-// 		{'F', {{0,0},{1,0},{2,0},{3,0},{0,1},{0,2},{1,2},{2,2},{3,2},{0,3},{0,4},{0,5},{-1,-1}}},
-// 		{'G', {{1,0},{2,0},{3,0},{0,1},{0,2},{0,3},{2,3},{3,3},{0,4},{3,4},{1,5},{2,5},{-1,-1}}},
-// 		{'H', {{0,0},{0,1},{0,2},{0,3},{0,4},{0,5},{3,0},{3,1},{3,2},{3,3},{3,4},{3,5},{1,3},{2,3},{-1,-1}}},
-// 		{'I', {{1,0},{2,0},{3,0},{2,1},{2,2},{2,3},{2,4},{1,5},{2,5},{3,5},{-1,-1}}},
-// 		{'J', {{1,0},{2,0},{3,0},{2,1},{2,2},{2,3},{2,4},{0,5},{1,5},{2,5},{-1,-1}}},
-// 		{'K', {{0,0},{0,1},{0,2},{0,3},{0,4},{0,5},{1,3},{2,2},{3,1},{3,4},{3,5},{-1,-1}}},
-// 		{'L', {{0,0},{0,1},{0,2},{0,3},{0,4},{0,5},{1,5},{2,5},{3,5},{-1,-1}}},
-// 		{'M', {{0,0},{3,0},{0,1},{1,1},{2,1},{3,1},{0,2},{3,2},{0,3},{3,3},{0,4},{3,4},{0,5},{3,5},{-1,-1}}},
-// 		{'N', {{0,0},{3,0},{0,1},{1,1},{3,1},{0,2},{2,2},{3,2},{0,3},{3,3},{0,4},{3,4},{0,5},{3,5},{-1,-1}}},
-// 		{'O', {{1,0},{2,0},{0,1},{0,2},{0,3},{0,4},{1,5},{2,5},{3,1},{3,2},{3,3},{3,4},{-1,-1}}},
-// 		{'P', {{0,0},{1,0},{2,0},{3,0},{0,1},{3,1},{0,2},{3,2},{0,3},{1,3},{2,3},{0,4},{0,5},{-1,-1}}},
-// 		{'Q', {{1,0},{2,0},{0,1},{3,1},{0,2},{3,2},{0,3},{3,3},{1,4},{2,4},{2,5},{3,5},{-1,-1}}},
-// 		{'R', {{0,0},{1,0},{2,0},{3,0},{0,1},{3,1},{0,2},{3,2},{0,3},{1,3},{2,3},{3,4},{0,4},{0,5},{3,5},{-1,-1}}},
-// 		{'S', {{1,0},{2,0},{3,0},{0,1},{0,2},{1,2},{2,2},{3,3},{3,4},{0,5},{1,5},{2,5},{-1,-1}}},
-// 		{'T', {{0,0},{1,0},{2,0},{3,0},{4,0},{2,1},{2,2},{2,3},{2,4},{2,5},{-1,-1}}},
-// 		{'U', {{0,0},{3,0},{0,1},{3,1},{0,2},{3,2},{0,3},{3,3},{0,4},{3,4},{1,5},{2,5},{-1,-1}}},
-// 		{'V', {{0,0},{4,0},{0,1},{4,1},{0,2},{4,2},{1,3},{3,3},{1,4},{3,4},{2,5},{-1,-1}}},
-// 		{'W', {{0,0},{4,0},{0,1},{4,1},{0,2},{4,2},{0,3},{4,3},{0,4},{4,4},{1,5},{3,5},{2,2},{2,3},{2,4},{-1,-1}}},
-// 		{'X', {{1,0},{1,1},{2,2},{3,3},{4,4},{4,5},{1,5},{1,4},{2,3},{3,2},{4,1},{4,0},{-1,-1}}},
-// 		{'Y', {{0,0},{4,0},{1,1},{3,1},{2,2},{2,3},{2,4},{2,5},{-1,-1}}},
-// 		{'Z', {{0,0},{1,0},{2,0},{3,0},{3,1},{2,2},{1,3},{0,4},{0,5},{1,5},{2,5},{3,5},{-1,-1}}}
-// 	};
-
-// 	if (letter < 'A' || letter > 'Z')
-// 		return (empty);
-// 	return (alphabet[letter - 'A']);
-// }
-
-// static void	put_2by2_square(void *my_struct, int x, int y, unsigned int color)
-// {
-// 	t_img *const	img = (t_img *)my_struct;
-// 	const int		bpp = img->bits_per_pixel / sizeof(int *);
-// 	int				t;
-// 	int				s;
-
-// 	if (my_struct == NULL
-// 		|| img->addr == NULL)
-// 		return ;
-// 	t = 0;
-// 	while (t < 2)
-// 	{
-// 		s = 0;
-// 		while (s < 2)
-// 		{
-// 			if (x + t >= 0 && y + s >= 0
-// 				&& x + t < img->width && y + s < img->heigth)
-// 				*(unsigned int *)(img->addr + ((y + s) * img->line_length
-// 							+ (x + t) * bpp)) = color;
-// 			s++;
-// 		}
-// 		t++;
-// 	}
-// }
-
-// static void	draw_letter(void *my_struct, int x, int y,
-// 	t_draw_map2 letter, unsigned int color)
-// {
-// 	int				my_x;
-// 	int				my_y;
-// 	int				i;
-
-// 	i = 0;
-// 	while (letter.pixel[i][0] != -1)
-// 	{
-// 		my_x = x + letter.pixel[i][0] * 2;
-// 		my_y = y + letter.pixel[i][1] * 2;
-// 		put_2by2_square(my_struct, my_x, my_y, color);
-// 		i++;
-// 	}
-// }

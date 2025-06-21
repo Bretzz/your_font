@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   yft_int.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: totommi <totommi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 01:48:06 by totommi           #+#    #+#             */
-/*   Updated: 2025/06/21 02:15:34 by totommi          ###   ########.fr       */
+/*   Updated: 2025/06/21 17:51:57 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ to do with that image (similar to xpm functions) */
 
 # include "libft.h"
 # include "mlx.h"
+# include "mlx_int.h"
 # include <unistd.h>
+
+# define VOID 0x000000
+# define FILL 0xffffff
 
 # define VOID_STRING "Void"
 # define FILL_STRING "Fill"
@@ -28,7 +32,7 @@ to do with that image (similar to xpm functions) */
 # define WIDTH_STRING "width="
 
 // mlx img related data
-typedef struct s_img
+typedef struct s_my_img
 {
 	void	*img;
 	char	*addr;
@@ -38,7 +42,7 @@ typedef struct s_img
 	int		endian;
 	int		width;
 	int		heigth;
-}				t_img;
+}				t_my_img;
 
 /* current 16x16, go with malloc for bigger sized fonts */
 typedef struct s_draw_map
@@ -64,27 +68,37 @@ typedef struct s_font
 	t_draw_map		ascii_table[128];
 }				t_font;
 
-void	*yft_string_to_image(void *mlx_ptr, const char *font_name, const char *string, int scale);
+/* USE THE FONT */
 
-t_img	yft_img_init(void *mlx_ptr, int length, int heigth);
+void		*yft_string_to_image(void *mlx_ptr, const char *font_name,
+				const char *string, int scale);
 
-void	yft_draw_ascii(t_img *img, t_draw_map *map, int x, int scale);
+int			yft_string_put(void *img_ptr, int x, int y, const char *string);
+
+t_my_img	yft_img_init(void *mlx_ptr, int length, int heigth);
+
+void		yft_draw_ascii(t_my_img *img, t_draw_map *map,
+				int *coord, int scale);
 
 /* GET THE FONT */
 
 /* do not ge it out of here */
-t_font	*yft_font_db(int n);
+t_font		*yft_font_db(int n);
 
 /* import your font */
-int		yft_is_better(const char *path);
+int			yft_is_better(const char *path);
 
-int		yft_parse_file(const char *path);
+int			yft_parse_file(const char *path);
 
-int		yft_read_file(const char *path, char **file);
-int		yft_strip_comments(char *file);
-int		yft_monoline_file(char *file, char **monoline);
+int			yft_read_file(const char *path, char **file);
+int			yft_strip_comments(char *file);
+int			yft_monoline_file(char *file, char **monoline);
 
-int		yft_fill_font(char *monoline, t_font *font);
-int		yft_fill_map(char *miniline, t_font *font);
+int			yft_fill_font(char *monoline, t_font *font);
+int			yft_fill_map(char *miniline, t_font *font);
+
+/* UTILS */
+
+void		img_get_data(void *img_ptr, t_my_img *img);
 
 #endif

@@ -33,6 +33,8 @@ INKS			= -I$(CURDIR) -I$(LIBFT) -I$(MLX_DIR)
 SRCS_DIR		=
 SRC_FILES		= yft_is_better.c \
 				yft_string_to_image.c \
+				yft_string_put.c \
+				\
 				yft_draw_ascii.c \
 				yft_fill_font.c \
 				yft_fill_map.c \
@@ -40,7 +42,9 @@ SRC_FILES		= yft_is_better.c \
 				yft_monoline_file.c \
 				yft_parse_file.c \
 				yft_read_file.c \
-				yft_strip_comments.c
+				yft_strip_comments.c \
+				\
+				img_get_data.c
 
 SRCS			= $(addprefix $(SRCS_DIR), $(SRC_FILES))
 

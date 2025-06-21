@@ -6,7 +6,7 @@
 /*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 05:07:07 by totommi           #+#    #+#             */
-/*   Updated: 2025/06/20 12:25:28 by topiana-         ###   ########.fr       */
+/*   Updated: 2025/06/21 17:24:39 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static unsigned int	get_actual_length(char *file)
 	}
 	return (len);
 }
+
 int	yft_monoline_file(char *file, char **monoline)
 {
 	unsigned int	total;
@@ -46,7 +47,7 @@ int	yft_monoline_file(char *file, char **monoline)
 	while (file[i] != '\0')
 	{
 		if (!ft_isspace(file[i]))
-			(*monoline)[s++] = file[i]; 
+			(*monoline)[s++] = file[i];
 		i++;
 	}
 	(*monoline)[s] = '\0';

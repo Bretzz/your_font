@@ -6,7 +6,7 @@
 /*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 04:25:00 by totommi           #+#    #+#             */
-/*   Updated: 2025/06/20 12:25:37 by topiana-         ###   ########.fr       */
+/*   Updated: 2025/06/21 17:25:19 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static void	strip_line(char *line)
 	}
 }
 
-int		yft_strip_comments(char *file)
+int	yft_strip_comments(char *file)
 {
 	if (file == NULL)
 		return (1);

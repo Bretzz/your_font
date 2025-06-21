@@ -4,9 +4,9 @@
 	font="Wobbly",
 	width=16,
 	heigth=16,
-	space=1;
+	space=3;
 	colors=4,
-	". c Void",
+	". c 0x0f213f",
 	"# c 0xff00ac",
 	"@ c 0x00ffa2",
 	"x c 0xff0000"

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   yft.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: totommi <totommi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 02:09:18 by totommi           #+#    #+#             */
-/*   Updated: 2025/06/21 02:10:54 by totommi          ###   ########.fr       */
+/*   Updated: 2025/06/21 17:56:37 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ to do with that image (similar to xpm functions) */
 int		yft_is_better(const char *path);
 
 /* get a sprite like image as in 'xmp_file_to_image' */
-void	*yft_string_to_image(void *mlx_ptr, const char *font_name, const char *string, int scale);
+void	*yft_string_to_image(void *mlx_ptr, const char *font_name,
+			const char *string, int scale);
+
+/* puts the string directly on the image passed */
+int		yft_string_put(void *img_ptr, int x, int y, const char *string);
 
 #endif

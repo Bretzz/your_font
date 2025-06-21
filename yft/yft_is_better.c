@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   yft_is_better.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: totommi <totommi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 03:51:02 by totommi           #+#    #+#             */
-/*   Updated: 2025/06/21 02:14:39 by totommi          ###   ########.fr       */
+/*   Updated: 2025/06/21 17:52:24 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ int		yft_is_better(const char *path);
 
 t_font	*yft_font_db(int n)
 {
-	static	t_font	fonts[10];
+	static t_font	fonts[10];
 
 	if (n >= 0 && n < 10)
-		return(&fonts[n]);
+		return (&fonts[n]);
 	return (NULL);
 }
 
-int		yft_is_better(const char *path)
+int	yft_is_better(const char *path)
 {
 	static int		index;
 	char			*file;
@@ -41,7 +41,10 @@ int		yft_is_better(const char *path)
 		return (free(file), 5);
 	free(file);
 	if (yft_fill_font(monoline, yft_font_db(index)) != 0)
+	{
+		ft_memset(yft_font_db(index), 0, sizeof(t_font));
 		return (free(monoline), 6);
+	}
 	free(monoline);
 	index++;
 	return (0);

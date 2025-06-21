@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   yft_string_to_image.c                              :+:      :+:    :+:   */
+/*   yft_string_put.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/20 01:47:52 by totommi           #+#    #+#             */
-/*   Updated: 2025/06/21 17:54:59 by topiana-         ###   ########.fr       */
+/*   Created: 2025/06/21 15:19:47 by topiana-          #+#    #+#             */
+/*   Updated: 2025/06/21 17:56:05 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "yft_int.h"
 
-void	*yft_string_to_image(void *mlx_ptr, const char *font_name,
-			const char *string, int scale);
+int	yft_string_put(void *img_ptr, int x, int y, const char *string);
 
-static t_font	*get_font_by_name(const char *font)
+static t_font	*get_any_font(void)
 {
 	t_font *const	fonts = yft_font_db(0);
 	unsigned int	i;
@@ -23,7 +22,7 @@ static t_font	*get_font_by_name(const char *font)
 	i = 0;
 	while (i < 10)
 	{
-		if (!ft_strcmp(font, fonts[i].name))
+		if (fonts[i].name[0] != '\0')
 			return (&fonts[i]);
 		i++;
 	}
@@ -52,33 +51,38 @@ static void	fill_spacing(t_my_img *img, t_font *font, int x, int scale)
 	}
 }
 
-/* font:string */
-void	*yft_string_to_image(void *mlx_ptr, const char *font_name,
-	const char *string, int scale)
+/* font is arbitrairly choosen for now... */
+/* data is formatted like this:
+	data[0] = x,
+	data[1] = y,
+	data[2] = img width
+	data[3] = img heigth */
+/* right now scale is 1 */
+int	yft_string_put(void *img_ptr, int x, int y, const char *string)
 {
-	t_font *const	font = get_font_by_name(font_name);
-	t_my_img		img;
+	t_font *const	font = get_any_font();
+	t_my_img		my_img;
 	size_t			i;
+	const int		scale = 3;
 	int				coord[2];
 
 	if (font == NULL)
 	{
-		ft_printfd(2, "yft: Invalid font\n");
-		return (NULL);
+		ft_printfd(2, "yft: No font found\n");
+		return (1);
 	}
-	img = yft_img_init(mlx_ptr, ft_strlen(string)
-			* (font->width + font->space) * scale,
-			font->heigth * scale);
-	if (img.img == NULL)
-		return (NULL);
-	ft_memset(coord, 0, 2 * sizeof(int));
+	coord[0] = x;
+	coord[1] = y;
 	i = 0;
+	img_get_data(img_ptr, &my_img);
 	while (string[i] != '\0')
 	{
-		yft_draw_ascii(&img, &font->ascii_table[(int)string[i]], coord, scale);
+		yft_draw_ascii(&my_img, &font->ascii_table[(int)string[i]],
+			coord, scale);
 		if (string[i++ + 1] != '\0')
-			fill_spacing(&img, font, (coord[0] + font->width) * scale, scale);
+			fill_spacing(&my_img, font, (coord[0] + font->width)
+				* scale, scale);
 		coord[0] = coord[0] + font->width + font->space;
 	}
-	return (img.img);
+	return (0);
 }

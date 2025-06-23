@@ -26,8 +26,16 @@ MLX_DIR			= $(shell find .. -type d -name "minilibx*")
 LINKS			=
 
 #Includes
-INKS			= -I$(CURDIR) -I$(LIBFT) -I$(MLX_DIR)
+INKS			= -I$(CURDIR) -I$(LIBFT) -I$(MLX_DIR) -Iusr/X11/include
 
+ifeq ($(UNAME),Darwin)
+	DEFS		= -D __APPLE__
+	INKS		+= -I/usr/X11/include -I/opt/homebrew/include
+else ifeq ($(UNAME),Linux)
+	INKS		+= -I/usr/include
+else
+	UNAME = Error
+endif
 
 #source files (expected in the root folder)
 SRCS_DIR		=
@@ -44,7 +52,8 @@ SRC_FILES		= yft_is_better.c \
 				yft_read_file.c \
 				yft_strip_comments.c \
 				\
-				img_get_data.c
+				img_get_data.c \
+				fill_spacing.c
 
 SRCS			= $(addprefix $(SRCS_DIR), $(SRC_FILES))
 
@@ -66,7 +75,6 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c | $(OBJS_DIR)
 
 $(NAME): $(OBJS)
 	@ar rcs $(NAME) $(OBJS)
-#	@ar rcs $(LIBFT)libft.a $(LIBFT)$(OBJS_DIR)* $(OBJS_DIR)*
 
 tar:
 	@ls | grep -q "$(NAME).tar" && rm -f $(NAME).tar || true
@@ -81,3 +89,5 @@ fclean: clean
 lre: clean all
 
 re: fclean all
+
+.PHONY: all clean fclean re lre tar

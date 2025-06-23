@@ -6,7 +6,7 @@
 /*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 01:47:52 by totommi           #+#    #+#             */
-/*   Updated: 2025/06/21 17:54:59 by topiana-         ###   ########.fr       */
+/*   Updated: 2025/06/22 17:20:25 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,34 +30,12 @@ static t_font	*get_font_by_name(const char *font)
 	return (NULL);
 }
 
-static void	fill_spacing(t_my_img *img, t_font *font, int x, int scale)
-{
-	int	my_x;
-	int	my_y;
-	int	i;
-
-	i = 0;
-	while (i < font->space * scale)
-	{
-		my_y = 0;
-		while (my_y < font->heigth * scale)
-		{
-			my_x = x + i;
-			if (my_x < img->width && my_y < img->heigth)
-				*(unsigned int *)(img->addr + ((my_y * img->line_length)
-							+ (my_x * img->bpp))) = font->table[0].color;
-			my_y++;
-		}
-		i++;
-	}
-}
-
 /* font:string */
 void	*yft_string_to_image(void *mlx_ptr, const char *font_name,
 	const char *string, int scale)
 {
 	t_font *const	font = get_font_by_name(font_name);
-	t_my_img		img;
+	t_yft_img		img;
 	size_t			i;
 	int				coord[2];
 
@@ -68,7 +46,7 @@ void	*yft_string_to_image(void *mlx_ptr, const char *font_name,
 	}
 	img = yft_img_init(mlx_ptr, ft_strlen(string)
 			* (font->width + font->space) * scale,
-			font->heigth * scale);
+			font->height * scale);
 	if (img.img == NULL)
 		return (NULL);
 	ft_memset(coord, 0, 2 * sizeof(int));
@@ -77,8 +55,8 @@ void	*yft_string_to_image(void *mlx_ptr, const char *font_name,
 	{
 		yft_draw_ascii(&img, &font->ascii_table[(int)string[i]], coord, scale);
 		if (string[i++ + 1] != '\0')
-			fill_spacing(&img, font, (coord[0] + font->width) * scale, scale);
-		coord[0] = coord[0] + font->width + font->space;
+			fill_spacing(&img, font, coord, scale);
+		coord[0] = coord[0] + (font->width + font->space) * scale;
 	}
 	return (img.img);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   yft_int.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: totommi <totommi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 01:48:06 by totommi           #+#    #+#             */
-/*   Updated: 2025/06/21 17:51:57 by topiana-         ###   ########.fr       */
+/*   Updated: 2025/06/23 02:28:03 by totommi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ to do with that image (similar to xpm functions) */
 
 # include "libft.h"
 # include "mlx.h"
-# include "mlx_int.h"
 # include <unistd.h>
 
 # define VOID 0x000000
@@ -31,8 +30,19 @@ to do with that image (similar to xpm functions) */
 # define FONT_STRING "font="	/* maybe useless? (and so on...) */
 # define WIDTH_STRING "width="
 
+# ifdef __APPLE__
+
+typedef struct s_mlx_img
+{
+	int		width;
+	int		height;
+	void	*other;
+}			t_mlx_img;
+
+# endif
+
 // mlx img related data
-typedef struct s_my_img
+typedef struct s_yft_img
 {
 	void	*img;
 	char	*addr;
@@ -41,8 +51,8 @@ typedef struct s_my_img
 	int		line_length;
 	int		endian;
 	int		width;
-	int		heigth;
-}				t_my_img;
+	int		height;
+}				t_yft_img;
 
 /* current 16x16, go with malloc for bigger sized fonts */
 typedef struct s_draw_map
@@ -60,7 +70,7 @@ typedef struct s_color_pair
 typedef struct s_font
 {
 	char			name[128];			// name of the font
-	int				heigth;				// heigth of each char
+	int				height;				// height of each char
 	int				width;				// width of each char
 	int				space;				// space between letters
 	int				colors;
@@ -75,9 +85,9 @@ void		*yft_string_to_image(void *mlx_ptr, const char *font_name,
 
 int			yft_string_put(void *img_ptr, int x, int y, const char *string);
 
-t_my_img	yft_img_init(void *mlx_ptr, int length, int heigth);
+t_yft_img	yft_img_init(void *mlx_ptr, int length, int height);
 
-void		yft_draw_ascii(t_my_img *img, t_draw_map *map,
+void		yft_draw_ascii(t_yft_img *img, t_draw_map *map,
 				int *coord, int scale);
 
 /* GET THE FONT */
@@ -99,6 +109,7 @@ int			yft_fill_map(char *miniline, t_font *font);
 
 /* UTILS */
 
-void		img_get_data(void *img_ptr, t_my_img *img);
+void		img_get_data(void *img_ptr, t_yft_img *img);
+void		fill_spacing(t_yft_img *img, t_font *font, int *coord, int scale);
 
 #endif

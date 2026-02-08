@@ -58,7 +58,7 @@ clean:
 	rm -f $(OBJS)
 
 fclean: clean
-	rm -rf $(MLX_DIR)
+	rm -rf $(MLX_DIR) $(NAME)
 
 re: fclean all
 

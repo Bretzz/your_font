@@ -131,7 +131,7 @@ Below an example of a valid definition block.
 	/* This is a valid definition block */
 	font = "MyCoolFont",
 	width = 4,
-	height = 3,
+	heigth = 3,
 	space = 0,
 	colors = 4,
 	"` c Void",

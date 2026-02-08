@@ -3,7 +3,7 @@
 	/* DEFINITION */
 	font="Wobbly",
 	width=16,
-	height=16,
+	heigth=16,
 	space=0,
 	colors=4,
 	". c 0x0f213f",

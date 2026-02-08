@@ -6,7 +6,7 @@
 /*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 17:37:58 by topiana-          #+#    #+#             */
-/*   Updated: 2026/02/07 17:53:38 by topiana-         ###   ########.fr       */
+/*   Updated: 2026/02/08 21:30:35 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,5 @@ int		ft_atoi(const char *nptr);
 int		ft_atohexi(const char *nptr);
 
 /* MISCELLANEOUS */
+char	**ft_split(char const *s, char c);
 char	*get_next_line(int fd);

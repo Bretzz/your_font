@@ -6,7 +6,7 @@
 /*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 03:51:02 by totommi           #+#    #+#             */
-/*   Updated: 2026/02/07 20:26:13 by topiana-         ###   ########.fr       */
+/*   Updated: 2026/02/08 20:40:59 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ int	yft_is_better(const char *path)
 
 	if (index == MAX_FONTS)
 		return (1);
-	if (yft_parse_file(path) != 0)
-		return (2);
 	if (yft_read_file(path, &file) != 0)
-		return (3);
+		return (2);
+	if (yft_parse_file(file) != 0)
+		return (free(file), 3);
 	if (yft_strip_comments(file) != 0)
 		return (free(file), 4);
 	if (yft_monoline_file(file, &monoline) != 0)

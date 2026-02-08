@@ -6,7 +6,7 @@
 /*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 02:09:00 by totommi           #+#    #+#             */
-/*   Updated: 2026/02/08 20:11:12 by topiana-         ###   ########.fr       */
+/*   Updated: 2026/02/08 22:16:47 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int main(void)
 	int ret = yft_is_better("../fonts/wobbly.yft");
 	if (ret != 0)
 	{
-		printf("Failed to load font");
+		printf("Failed to load font\n");
 		return 1;
 	}
 

@@ -6,7 +6,7 @@
 /*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 04:55:27 by totommi           #+#    #+#             */
-/*   Updated: 2025/06/22 17:23:42 by topiana-         ###   ########.fr       */
+/*   Updated: 2026/02/08 21:55:43 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static int	get_font_format(char *monoline, t_font *font, size_t *i)
 	char			*target;
 
 	ft_strlcpy(font->name, &monoline[7], get_quotes_len(&monoline[6]) + 1);
-	target = ft_strnstr(monoline, "height=", mono_len);
+	target = ft_strnstr(monoline, "heigth=", mono_len);
 	if (target == NULL)
 		return (1);
 	font->height = ft_atoi(&target[7]);

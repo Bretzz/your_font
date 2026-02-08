@@ -1,8 +1,8 @@
 
 ## your_font
-This is an indipended project included in *cub3d*, the 42-common-core RayCasting project. It's a monospace-scalable font renderer library for other CPU drawing libraries (like MinilibX).
-<br>
-Designed and realized by Tommaso Piana Agostinetti.
+This is an indipended project included in *cub3d*, the 42-common-core RayCasting project. It's a monospace, scalable font renderer library for CPU drawing libraries (like MinilibX).
+<br><br>
+*Designed and realized by Tommaso Piana Agostinetti.*
 
 ### Contents
 - source code in C to create the yft library

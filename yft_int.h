@@ -6,7 +6,7 @@
 /*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 01:48:06 by totommi           #+#    #+#             */
-/*   Updated: 2026/02/08 19:16:31 by topiana-         ###   ########.fr       */
+/*   Updated: 2026/02/08 20:06:47 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ typedef struct s_font
 
 int			yft_string_put(t_img *img,
 				void (pixel_put)(t_img*, unsigned int, unsigned int, unsigned int),
-				unsigned int x, unsigned int y, const char *string, const char *font_name);
+				unsigned int x, unsigned int y, const char *string, const char *font_name, int scale);
 
 /* DRAWERS */
 

@@ -41,7 +41,7 @@ all: $(NAME)
 	$(CC) $(CFLAGS) $(INKS) $(DEFS) -c $< -o $@
 
 $(YFT)yft.a:
-	make -C ../
+	@make -C ../ --quiet
 
 $(MLX_DIR):
 	@echo "${BOLD}creating $(MLX_DIR)...${RESET}"
@@ -55,10 +55,10 @@ $(NAME): $(MLX) $(YFT)yft.a $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(YFT)yft.a $(MLX) $(INKS) $(LINKS) -o $(NAME)
 
 clean:
-	rm -f $(OBJS)
+	@rm -f $(OBJS)
 
 fclean: clean
-	rm -rf $(MLX_DIR) $(NAME)
+	@rm -rf $(MLX_DIR) $(NAME)
 
 re: fclean all
 

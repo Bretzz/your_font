@@ -6,7 +6,7 @@
 /*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 02:09:00 by totommi           #+#    #+#             */
-/*   Updated: 2026/02/08 18:53:12 by topiana-         ###   ########.fr       */
+/*   Updated: 2026/02/08 20:11:12 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int main(void)
 	img_data.pre_loaded = preloaded;
 
 	// Write on the image
-	yft_string_put(&img_data, &pixel_put, 0, 0, "your font is actually pretty :)", "Wobbly");
+	yft_string_put(&img_data, &pixel_put, 0, 0, "your font is actually pretty :)", "Wobbly", 2);
 	
 	// Draw the image on the window using MinilibX
 	mlx_put_image_to_window(mlx_ptr, win_ptr, img_ptr, 0, 0);

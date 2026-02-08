@@ -6,7 +6,7 @@
 /*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 15:19:47 by topiana-          #+#    #+#             */
-/*   Updated: 2026/02/08 19:09:07 by topiana-         ###   ########.fr       */
+/*   Updated: 2026/02/08 20:05:42 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	yft_string_put(t_img *img_ptr,
 	void (pixel_put)(t_img*, unsigned int, unsigned int, unsigned int),
-	unsigned int x, unsigned int y, const char *string, const char *font_name);
+	unsigned int x, unsigned int y, const char *string, const char *font_name, int scale);
 
 static t_font	*get_any_font(const char *font_name)
 {
@@ -34,11 +34,10 @@ static t_font	*get_any_font(const char *font_name)
 
 int	yft_string_put(t_img *img,
 	void (pixel_put)(t_img*, unsigned int, unsigned int, unsigned int),
-	unsigned int x, unsigned int y, const char *string, const char *font_name)
+	unsigned int x, unsigned int y, const char *string, const char *font_name, int scale)
 {
 	t_font *const	font = get_any_font(font_name);
 	size_t			i;
-	const int		scale = 2;
 	int				coord[2];
 
 	if (font == NULL)

@@ -6,7 +6,7 @@
 /*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 02:09:18 by totommi           #+#    #+#             */
-/*   Updated: 2026/02/08 18:44:03 by topiana-         ###   ########.fr       */
+/*   Updated: 2026/02/08 20:07:27 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ the 'pixel_put' functions takes:
 	@color the color of the pixel */
 int		yft_string_put(t_img *img,
 			void (pixel_put)(t_img*, unsigned int, unsigned int, unsigned int),
-			unsigned int x, unsigned int y, const char *string, const char *font_name);
+			unsigned int x, unsigned int y, const char *string, const char *font_name, int scale);
 
 #endif

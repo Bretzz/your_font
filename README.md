@@ -165,6 +165,11 @@ Below an example of a valid Character + Glyph block.
 	}
 }
 ```
+
+## Resources
+
+If you need an online tool to draw your beautifult ascii glyps, [this](https://www.asciiart.eu/ascii-draw-studio) is what I used.
+
 ---
 <br>
 

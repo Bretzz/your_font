@@ -6,7 +6,7 @@
 /*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 02:09:18 by totommi           #+#    #+#             */
-/*   Updated: 2026/02/07 19:08:31 by topiana-         ###   ########.fr       */
+/*   Updated: 2026/02/08 18:44:03 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ The first usecase is with MinilibX, but it's not bound to that library. */
 // data needed to draw the font
 typedef struct s_img
 {
-	void	*img_ptr;		// the data of your interface
-	void	*pre_loaded;	// some stored data if you need them
-	int		width;			// image width
-	int		height;			// image heigth
+	void			*img_ptr;		// the data of your interface
+	void			*pre_loaded;	// some stored data if you need them
+	unsigned int	width;			// image width
+	unsigned int	height;			// image heigth
 }				t_img;
 
 /* import your font */

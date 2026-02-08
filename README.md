@@ -1,27 +1,27 @@
 
 ## your_font
-This is an indipended project included in *cub3d*, the 42-common-core RayCasting project. It's a font renderer library for other CPU drawing libraries (like MinilibX).
+This is an indipended project included in *cub3d*, the 42-common-core RayCasting project. It's a monospace-scalable font renderer library for other CPU drawing libraries (like MinilibX).
 <br>
 Designed and realized by Tommaso Piana Agostinetti.
 
 ### Contents
- - source code in C to create the yft library
+- source code in C to create the yft library
  <!-- - man pages (in `man/` directory) -->
- <!-- - a **test** program (in `test/` directory) is built
-   with the library -->
- - 1 default **font** (in `fonts/` directory) is included
- - a public include file **yft.h**
+- a **test** program (in `test/` directory) is provided the library
+- 1 default **font** (in `fonts/` directory) is included
+- a public include file **yft.h**
 
 ### Requirements
- - gcc
- - make
+- gcc
+- make
 
 ```bash
 sudo apt-get install gcc make #(Debian/Ubuntu)
 ```
 
 ### How to compile
-Run `make` in the root folder
+* Run `make` in the root folder to compile the library.
+* Run `make` in the `test/` folder to compile the test program.
 
 
 ### Installation
@@ -47,10 +47,10 @@ The library exposes a structure and two functions:
 ```c
 typedef struct s_img
 {
-	void	*img_ptr;
-	void	*pre_loaded;
-	int		width;
-	int		height;
+	void			*img_ptr;
+	void			*pre_loaded;
+	unsigned int	width;
+	unsigned int	height;
 }				t_img;
 ```
 This wrapper for the external library image provides all that's needed for *your_font* to operate. *img_ptr* and *pre_loaded* aren't used internally by the library, they are for the user to access inside the *pixel_put* implementation.
@@ -121,7 +121,7 @@ The Definition block contains at least 4 directives:
 - The **color** directive: specifying the number of colors used in the font.
 
 The colors' definition is also inside the Definition block, right after the `color` directive.
-The syntax used to define a color is the following: `"<ascii> c <hexa>"`, where `ascii` is the ascii character used to identify that color in the characters glyph, and `hexa` is the hexadecimal representation of the color, like `0xffffff` for white or `0xff0000` for red. `Void` it's also a valid hexa, it indicates that the background shouldn't be filled with any color.
+The syntax used to define a color is the following: `"<ascii> c <hexa>"`, where `ascii` is the ascii character used to identify that color in the characters glyph, and `hexa` is the hexadecimal representation of the color, like `0xffffff` for white or `0xff0000` for red. `Void` it's also a valid hexa, it indicates that the background shouldn't be filled with any color. The first color defined it's the **Background** color and will be used to fill the spacing inbetween characters and as the whole SPACE character (`ascii=20`).
 
 Below an example of a valid definition block.
 ```c

@@ -6,29 +6,30 @@
 /*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 13:26:01 by topiana-          #+#    #+#             */
-/*   Updated: 2026/02/07 17:57:11 by topiana-         ###   ########.fr       */
+/*   Updated: 2026/02/08 19:16:19 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "yft_int.h"
 
-void	yft_draw_ascii(t_img *img_ptr,
+void	yft_draw_ascii(t_img *img,
 	void (pixel_put)(t_img*, unsigned int, unsigned int, unsigned int),
 	t_draw_map *map, int *coord, int scale);
 
-static void	draw_scaled_pixel(
+// #todo i want scaling to be int so i can do flip things, for now just casting it is fine
+void	draw_scaled_pixel(
 	t_img *img,
 	void (pixel_put)(t_img*, unsigned int, unsigned int, unsigned int),
-	int *pixel, unsigned int color, int scale)
+	unsigned int *pixel, unsigned int color, int scale)
 {
-	int	t;
-	int	s;
+	unsigned int	t;
+	unsigned int	s;
 
 	t = 0;
-	while (t < scale)
+	while (t < (unsigned int)scale)
 	{
 		s = 0;
-		while (s < scale)
+		while (s < (unsigned int)scale)
 		{
 			if (pixel[0] + t < img->width && pixel[1] + s < img->height)
 				(*pixel_put)(img, pixel[0] + t, pixel[1] + s, color);
@@ -43,8 +44,8 @@ void	yft_draw_ascii(
 	void (pixel_put)(t_img*, unsigned int, unsigned int, unsigned int),
 	t_draw_map *map, int *coord, int scale)
 {
-	int	pixel[2];
-	int	i;
+	unsigned int	pixel[2];
+	int				i;
 
 	if (map->what == '\0')
 		return ;

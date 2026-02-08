@@ -6,7 +6,7 @@
 	height=16,
 	space=0,
 	colors=4,
-	". c Void", // 0x0f213f
+	". c 0x0f213f",
 	"# c 0xff00ac",
 	"@ c 0x00ffa2",
 	"x c 0xff0000"

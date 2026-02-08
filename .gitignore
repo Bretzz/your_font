@@ -2,4 +2,5 @@ obj/
 **/*.a
 **/*.out
 **/*.o
-minilibx*/
+**/minilibx*/
+**/your_demo

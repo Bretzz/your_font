@@ -6,7 +6,7 @@
 /*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 01:48:06 by totommi           #+#    #+#             */
-/*   Updated: 2026/02/07 20:26:07 by topiana-         ###   ########.fr       */
+/*   Updated: 2026/02/08 19:16:31 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ to do with that image (similar to xpm functions) */
 // what the user will pass
 typedef struct s_img
 {
-	void	*img_ptr;
-	void	*pre_loaded;
-	int		width;
-	int		height;
+	void			*img_ptr;
+	void			*pre_loaded;
+	unsigned int	width;
+	unsigned int	height;
 }				t_img;
 
 /* current 16x16, go with malloc for bigger sized fonts */
@@ -86,9 +86,19 @@ int			yft_string_put(t_img *img,
 				void (pixel_put)(t_img*, unsigned int, unsigned int, unsigned int),
 				unsigned int x, unsigned int y, const char *string, const char *font_name);
 
-void		yft_draw_ascii(t_img *img_ptr,
+/* DRAWERS */
+
+void		draw_scaled_pixel(t_img *img,
+				void (pixel_put)(t_img*, unsigned int, unsigned int, unsigned int),
+				unsigned int *pixel, unsigned int color, int scale);
+
+void		yft_draw_ascii(t_img *img,
 				void (pixel_put)(t_img*, unsigned int, unsigned int, unsigned int),
 				t_draw_map *map, int *coord, int scale);
+
+void		yft_draw_space(t_img *img,
+				void (pixel_put)(t_img*, unsigned int, unsigned int, unsigned int),
+				t_font *font, int *coord, int scale);
 
 /* GET THE FONT */
 

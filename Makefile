@@ -15,6 +15,7 @@ SRC_FILES		= yft_is_better.c \
 				yft_read_file.c \
 				yft_strip_comments.c \
 				\
+				yft_draw_space.c \
 				yft_draw_ascii.c \
 				yft_fill_spacing.c \
 				\

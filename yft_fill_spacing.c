@@ -6,7 +6,7 @@
 /*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 15:50:50 by topiana-          #+#    #+#             */
-/*   Updated: 2026/02/08 18:24:40 by topiana-         ###   ########.fr       */
+/*   Updated: 2026/02/08 19:16:58 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	fill_spacing(t_img *img,
 	void (pixel_put)(t_img*, unsigned int, unsigned int, unsigned int),
 	t_font *font, int *coord, int scale)
 {
-	const int	start_x = coord[0] + (font->width * scale);
-	int			my_x;
-	int			my_y;
-	int			i;
-	int			j;
+	const int		start_x = coord[0] + (font->width * scale);
+	unsigned int	my_x;
+	unsigned int	my_y;
+	int				i;
+	int				j;
 
 	if (font->table[0].color == VOID)
 		return ;

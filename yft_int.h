@@ -6,7 +6,7 @@
 /*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 01:48:06 by totommi           #+#    #+#             */
-/*   Updated: 2026/02/08 20:41:32 by topiana-         ###   ########.fr       */
+/*   Updated: 2026/02/09 21:35:08 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,14 @@ t_font		*yft_font_db(int n);
 /* import your font */
 int			yft_is_better(const char *path);
 
-int			yft_parse_file(char *path);
-
 int			yft_read_file(const char *path, char **file);
 int			yft_strip_comments(char *file);
 int			yft_monoline_file(char *file, char **monoline);
+
+int			yft_parse_monoline(char *path);
+int			yft_parse_definition_block(char **monoline);
+int			yft_parse_character_block(char **monoline);
+
 
 int			yft_fill_font(char *monoline, t_font *font);
 int			yft_fill_map(char *miniline, t_font *font);

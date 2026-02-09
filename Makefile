@@ -8,12 +8,16 @@ SRCS_DIR		=
 SRC_FILES		= yft_is_better.c \
 				yft_string_put.c \
 				\
-				yft_fill_font.c \
-				yft_fill_map.c \
-				yft_monoline_file.c \
-				yft_parse_file.c \
 				yft_read_file.c \
 				yft_strip_comments.c \
+				yft_monoline_file.c \
+				\
+				yft_parse_monoline.c \
+				yft_parse_definition_block.c \
+				yft_parse_character_block.c \
+				\
+				yft_fill_font.c \
+				yft_fill_map.c \
 				\
 				yft_draw_space.c \
 				yft_draw_ascii.c \

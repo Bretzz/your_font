@@ -1,6 +1,6 @@
 
 ## your_font
-This is an independent project included in *cub3d*, the 42-common-core RayCasting project. It's a monospace, scalable font renderer library for CPU drawing libraries (like MinilibX).
+This is a monospace, scalable font renderer library for CPU drawing libraries (like MinilibX).
 <br><br>
 *Designed and realized by Tommaso Piana Agostinetti.*
 
@@ -168,7 +168,7 @@ Below an example of a valid Character + Glyph block.
 
 ## Resources
 
-If you need an online tool to draw your beautifult ascii glyps, [this](https://www.asciiart.eu/ascii-draw-studio) is what I used.
+If you need an online tool to draw your beautifult ascii glyps, [ASCII Draw Studio](https://www.asciiart.eu/ascii-draw-studio) is what I used.
 
 ---
 <br>

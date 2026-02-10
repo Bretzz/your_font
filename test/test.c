@@ -6,7 +6,7 @@
 /*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 02:09:00 by totommi           #+#    #+#             */
-/*   Updated: 2026/02/08 22:16:47 by topiana-         ###   ########.fr       */
+/*   Updated: 2026/02/10 16:56:59 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,9 @@ void	pixel_put(t_img *img, unsigned int x, unsigned int y, unsigned int color)
 
 	if (x > img->width || y > img->height)
 		return ;
-	
-	int bpp, len, endian;
-
-	// get addr
-	char *addr = mlx_get_data_addr(img->img_ptr, &bpp, &len, &endian);
 
 	// draw addr
-	*(unsigned int *)(addr
+	*(unsigned int *)(*((char **)(img->pre_loaded) + 2)
 		+ ((y * ((int*)img->pre_loaded)[1])
 			+ (x * ((int*)img->pre_loaded)[0]))) = color;
 
@@ -72,12 +67,13 @@ int main(void)
 
 	// Prepare image data structure for your_font
 	t_img	img_data;
-	int preloaded[3] = { 0 };
+	int		preloaded[6] = { 0 };
+	char	**addr_ptr = ((char **)preloaded + 2);	// <-- storing the mem address inside an array of int
 	
 	img_data.width = 1000;
 	img_data.height = 300;
 	img_data.img_ptr = img_ptr;
-	mlx_get_data_addr(img_ptr, &preloaded[0], &preloaded[1], &preloaded[2]);
+	*addr_ptr = mlx_get_data_addr(img_ptr, &preloaded[0], &preloaded[1], &preloaded[2]);
 	preloaded[0] >>= 3;
 	img_data.pre_loaded = preloaded;
 

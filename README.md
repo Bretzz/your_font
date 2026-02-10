@@ -113,7 +113,7 @@ Three types of blocks exist: the [Definition](#definition-block) block, the [Cha
 
 ### Definition block
 
-The Definition block it's unique and must be the first block of the file. If multiple or none Definition block are found or the Definition block isn't at the beginning of the file, `yft: Invalid definition block` will be written on the standard error and the font will fail to load.
+The Definition block it's unique and must be the first block of the file. If the first block isn't a valid Definition block, `yft: Parsing error at Definition block` will be written on the standard error and the font will fail to load.
 <br>
 The Definition block contains at least 4 directives:
 - The **font** directive: specifying the name of the font (between dquotes, e.g. "MyCoolFont")
@@ -143,7 +143,7 @@ Below an example of a valid definition block.
 
 ### Character block
 
-The Character block contains the definition of a single character. It must contain the **ascii** directive which specifies the ascii value it wants to represent, e.g. `ascii=97` for the lowercase `a`. The `ascii` directive must be at the top of each Character block. If two Character block containing the same `ascii` directive are found, `yft: Multiple definition of <ascii>` will be written on the standard error and the font will fail to load.
+The Character block contains the definition of a single character. It must contain the **ascii** directive which specifies the ascii value it wants to represent, e.g. `ascii=97` for the lowercase `a`. The `ascii` directive must be at the top of each Character block. If two Character block containing the same `ascii` directive are found, the second one will overwrite the first one.
 <br>
 The Character block then contains a child block called the Glyph block.
 
@@ -165,6 +165,7 @@ Below an example of a valid Character + Glyph block.
 	}
 }
 ```
+The ascii used in the ascii art should be the one listed in the color section of the Definition block. If a foreign ascii is used, the whole row will become `Void` startig from that position.
 
 ## Resources
 

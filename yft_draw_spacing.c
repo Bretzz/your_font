@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   yft_fill_spacing.c                                 :+:      :+:    :+:   */
+/*   yft_draw_spacing.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 15:50:50 by topiana-          #+#    #+#             */
-/*   Updated: 2026/02/08 19:16:58 by topiana-         ###   ########.fr       */
+/*   Updated: 2026/02/10 15:48:23 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "yft_int.h"
 
-void	fill_spacing(t_img *img,
+void	yft_draw_spacing(t_img *img,
 	void (pixel_put)(t_img*, unsigned int, unsigned int, unsigned int),
 	t_font *font, int *coord, int scale);
 
-void	fill_spacing(t_img *img,
+void	yft_draw_spacing(t_img *img,
 	void (pixel_put)(t_img*, unsigned int, unsigned int, unsigned int),
 	t_font *font, int *coord, int scale)
 {

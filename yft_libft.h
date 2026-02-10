@@ -6,7 +6,7 @@
 /*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 17:37:58 by topiana-          #+#    #+#             */
-/*   Updated: 2026/02/09 21:46:23 by topiana-         ###   ########.fr       */
+/*   Updated: 2026/02/10 16:19:34 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin_free(char *s1, char *s2);
+int		ft_strset(const char *str, const char *set);
+int		starts_with(char *tocheck, char *tosearch);
 
 /* CONVERSIONS */
 

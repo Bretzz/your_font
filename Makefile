@@ -15,13 +15,14 @@ SRC_FILES		= yft_is_better.c \
 				yft_parse_monoline.c \
 				yft_parse_definition_block.c \
 				yft_parse_character_block.c \
+				yft_parse_glyph_block.c \
 				\
 				yft_fill_font.c \
 				yft_fill_map.c \
 				\
-				yft_draw_space.c \
 				yft_draw_ascii.c \
-				yft_fill_spacing.c \
+				yft_draw_space_ascii.c \
+				yft_draw_spacing.c \
 				\
 				yft_libft.c
 

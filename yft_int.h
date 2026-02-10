@@ -6,7 +6,7 @@
 /*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 01:48:06 by totommi           #+#    #+#             */
-/*   Updated: 2026/02/09 21:35:08 by topiana-         ###   ########.fr       */
+/*   Updated: 2026/02/10 15:59:48 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ an mlx image with the string passed using your font. Your choice of what
 to do with that image (similar to xpm functions) */
 
 # include "yft_libft.h"
-// # include "mlx.h"
 # include <unistd.h>
 # include <stdlib.h> // free
 # include <string.h> // memset, strcmp
@@ -35,6 +34,9 @@ to do with that image (similar to xpm functions) */
 # ifndef MAX_FONTS
 #  define MAX_FONTS 10
 # endif
+
+extern int g_parsing_width;
+extern int g_parsing_heigth;
 
 // # ifdef __APPLE__
 
@@ -96,7 +98,11 @@ void		yft_draw_ascii(t_img *img,
 				void (pixel_put)(t_img*, unsigned int, unsigned int, unsigned int),
 				t_draw_map *map, int *coord, int scale);
 
-void		yft_draw_space(t_img *img,
+void		yft_draw_space_ascii(t_img *img,
+				void (pixel_put)(t_img*, unsigned int, unsigned int, unsigned int),
+				t_font *font, int *coord, int scale);
+
+void		yft_draw_spacing(t_img *img,
 				void (pixel_put)(t_img*, unsigned int, unsigned int, unsigned int),
 				t_font *font, int *coord, int scale);
 
@@ -115,15 +121,10 @@ int			yft_monoline_file(char *file, char **monoline);
 int			yft_parse_monoline(char *path);
 int			yft_parse_definition_block(char **monoline);
 int			yft_parse_character_block(char **monoline);
+int			yft_parse_glyph_block(char *char_block);
 
 
 int			yft_fill_font(char *monoline, t_font *font);
 int			yft_fill_map(char *miniline, t_font *font);
-
-/* UTILS */
-
-void	fill_spacing(t_img *img,
-	void (pixel_put)(t_img*, unsigned int, unsigned int, unsigned int),
-	t_font *font, int *coord, int scale);
 
 #endif

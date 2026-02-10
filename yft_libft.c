@@ -6,7 +6,7 @@
 /*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 17:37:58 by topiana-          #+#    #+#             */
-/*   Updated: 2026/02/09 21:46:15 by topiana-         ###   ########.fr       */
+/*   Updated: 2026/02/10 16:23:10 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,6 +254,42 @@ char	*ft_strjoin_free(char *s1, char *s2)
 		ft_strlcat(twelve, s2, size);
 	free(s1);
 	return (twelve);
+}
+
+// check for any char of 'set' inside 'str'
+int ft_strset(const char *str, const char *set)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (ft_strichr(set, str[i]) == 0)
+			return (1);
+		++i;
+	}
+	return (0);
+}
+
+int	starts_with(char *tocheck, char *tosearch)
+{
+	size_t	i;
+
+	// printf("does '%s' starts with '%s'\n", tocheck, tosearch);
+
+	if ((long)tocheck * (long)tosearch == 0)
+		return (0);
+	if (tocheck == NULL && tosearch == NULL)
+		return (1);
+	i = 0;
+	while (tocheck[i] && tosearch[i] && tocheck[i] == tosearch[i])
+		++i;
+	if (tosearch[i] == '\0')
+	{
+		// printf("yes\n");
+		return (1);
+	}
+	return (0);
 }
 
 /* CONVERSIONS */

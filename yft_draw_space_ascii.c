@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   yft_draw_space.c                                   :+:      :+:    :+:   */
+/*   yft_draw_space_ascii.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: topiana- <topiana-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 19:00:37 by topiana-          #+#    #+#             */
-/*   Updated: 2026/02/08 19:23:14 by topiana-         ###   ########.fr       */
+/*   Updated: 2026/02/10 15:59:07 by topiana-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "yft_int.h"
 
-void	yft_draw_space(t_img *img,
+void	yft_draw_space_ascii(t_img *img,
 			void (pixel_put)(t_img*, unsigned int, unsigned int, unsigned int),
 			t_font *font, int *coord, int scale);
 
-void	yft_draw_space(t_img *img,
+void	yft_draw_space_ascii(t_img *img,
 		void (pixel_put)(t_img*, unsigned int, unsigned int, unsigned int),
 		t_font *font, int *coord, int scale)
 {
